@@ -10,13 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_16_121049) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_16_202612) do
   create_table "employees", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "instruments", force: :cascade do |t|
+    t.string "title"
+    t.string "condition"
+    t.integer "employee_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["employee_id"], name: "index_instruments_on_employee_id"
   end
 
   create_table "microposts", force: :cascade do |t|
@@ -32,4 +41,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_16_121049) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_foreign_key "instruments", "employees"
 end
